@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+
+  margin: 0;
+  padding: 0;
+  background: url("pexels-photo-189349.jpeg") no-repeat;
+  background-size: cover;
+  
+}
+
+.wrapper {
+  height: 100%;
+  width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  /*border: 1px solid;*/
+}
+
+form {
+  position: relative;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.cityInput[value] {
+  color: #6E6E6E;
+}
+
+.cityInput {
+  opacity: 0.5; 
+  height: 40px;
+  width: 100%;
+  padding: 5px;
+  padding-right: 105px;
+  border: 1px solid #C8C8C8;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.submitBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 40px;
+  background: #eda81f; 
+  color: #2e2e2e;
+  outline: none;
+  border: 1px solid #C8C8C8;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.submitBtn:hover {
+  background: #f6bb46; 
+}
+
+.cat {
+  color: #b2811f;
+}
+
+.wind {
+  color: #336e8a;
+}
+
+.labelHeader {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.weatherResultMain {
+  text-align: center;
+}
+
+.weatherResultExtra {
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff url("Stihii_start.jpg") right no-repeat;
+  border: 1px solid #eda81f;
+  border-right: none;
+  border-radius: 10px;
+  box-shadow: 1px 5px 10px #424242;
+  opacity: 0.9;
+}
+
+.bold {
+  font-weight: bold;
+}
