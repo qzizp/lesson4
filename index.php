@@ -6,9 +6,20 @@
     $userCity = $_GET["city"];
   }
 
-  $owAPI = "http://api.openweathermap.org/data/2.5/weather?q=" . $userCity . "&units=metric&lang=ru&appid=aa334c49b122b042d7b3f9bbde33f488";
-  $getWeather = file_get_contents($owAPI);
-  $json = json_decode($getWeather, TRUE);
+  $owAPI = "http://api.openweathermap.org/data/2.5/weather?q=" . $userCity . "&units=metric&lang=ru&appid=aa334c49b122b042d7b3f9bbde33f488";  
+
+  if (file_exists("cache.txt") === false) {
+    $getWeather = file_get_contents($owAPI);
+    $json = json_decode($getWeather, TRUE);
+    fopen("cache.txt", "c");
+    file_put_contents("cache.txt", $getWeather);
+  } else if (file_exists("cache.txt") === true && time() - filemtime("cache.txt") > 3600) {
+    file_put_contents("cache.txt", $getWeather);
+    $json = json_decode($getWeather, TRUE);
+       } else {
+         $getWeather = file_get_contents("cache.txt");
+         $json = json_decode($getWeather, TRUE);
+       }
 
   $weatherDescription = $json["weather"][0]["description"];
   $roundTemp = round($json["main"]["temp"]) . "&#8451;";
@@ -17,13 +28,6 @@
   $humidity = $json["main"]["humidity"] . "%";
   $sunrise = $json["sys"]["sunrise"];
   $sunset = $json["sys"]["sunset"];
-
-  if (file_exists("cache.txt") === false) {
-    fopen("cache.txt", "c");
-    file_put_contents("cache.txt", $getWeather);
-  } else if (file_exists("cache.txt") === true && time() - filemtime("cache.txt") > 3600) {
-    file_put_contents("cache.txt", $getWeather);
-      } 
 
   ?>
 
