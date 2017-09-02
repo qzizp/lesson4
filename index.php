@@ -14,8 +14,9 @@
     fopen("cache.txt", "c");
     file_put_contents("cache.txt", $getWeather);
   } else if (file_exists("cache.txt") === true && time() - filemtime("cache.txt") > 3600) {
-    file_put_contents("cache.txt", $getWeather);
+    $getWeather = file_get_contents($owAPI);
     $json = json_decode($getWeather, TRUE);
+    file_put_contents("cache.txt", $getWeather);
        } else {
          $getWeather = file_get_contents("cache.txt");
          $json = json_decode($getWeather, TRUE);
