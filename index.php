@@ -8,19 +8,32 @@
 
   $owAPI = "http://api.openweathermap.org/data/2.5/weather?q=" . $userCity . "&units=metric&lang=ru&appid=aa334c49b122b042d7b3f9bbde33f488";  
 
-  if (file_exists("cache.txt") === false) {
+  // СТАРЫЙ ВАРИАНТ - - - - - - - - - - - - - - - - - - - - - -
+
+  // if (!file_exists("cache.txt")) {
+  //   $getWeather = file_get_contents($owAPI);
+  //   $json = json_decode($getWeather, TRUE);
+  //   fopen("cache.txt", "c");
+  //   file_put_contents("cache.txt", $getWeather);
+  // } else if (file_exists("cache.txt") && time() - filemtime("cache.txt") > 3600) {
+  //   $getWeather = file_get_contents($owAPI);
+  //   $json = json_decode($getWeather, TRUE);
+  //   file_put_contents("cache.txt", $getWeather);
+  //      } else {
+  //        $getWeather = file_get_contents("cache.txt");
+  //        $json = json_decode($getWeather, TRUE);
+  //      }
+
+  // СТАРЫЙ ВАРИАНТ - - - - - - - - - - - - - - - - - - - - - -
+
+  if (!file_exists("cache.txt") || time() - filemtime("cache.txt") > 3600) {
     $getWeather = file_get_contents($owAPI);
-    $json = json_decode($getWeather, TRUE);
-    fopen("cache.txt", "c");
+    $json = json_decode($getWeather, TRUE);  
     file_put_contents("cache.txt", $getWeather);
-  } else if (file_exists("cache.txt") === true && time() - filemtime("cache.txt") > 3600) {
-    $getWeather = file_get_contents($owAPI);
+  } else {
+    $getWeather = file_get_contents("cache.txt");
     $json = json_decode($getWeather, TRUE);
-    file_put_contents("cache.txt", $getWeather);
-       } else {
-         $getWeather = file_get_contents("cache.txt");
-         $json = json_decode($getWeather, TRUE);
-       }
+  }
 
   $weatherDescription = $json["weather"][0]["description"];
   $roundTemp = round($json["main"]["temp"]) . "&#8451;";
